@@ -1,16 +1,15 @@
 chrome://inspect/
 
-### Documentation
-### Recommended Packages for Sublime and Atom
+#### Documentation
+#### Recommended Packages for Sublime and Atom
 
-# Documentation
+### Documentation
 
 https://devdocs.io/
 
+### Recommended Packages for Sublime and Atom:
 
-# Recommended Packages for Sublime and Atom:
-
-## Recommended Packages for Sublime
+#### Recommended Packages for Sublime
 
  - Emmet
 
@@ -21,7 +20,7 @@ https://devdocs.io/
    
    1. https://packagecontrol.io/packages/Color%20Highlighter  
 
-## Recommended Packages for Atom
+#### Recommended Packages for Atom
 
  - Emmet (emmetio)
 
