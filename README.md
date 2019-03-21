@@ -1,11 +1,26 @@
 chrome://inspect/
 
-#### Documentation
-#### Recommended Packages for Sublime and Atom
+1. Documentation
+2. Misc
+3. Recommended Packages for Sublime and Atom
 
 ### Documentation
 
 https://devdocs.io/
+
+### Misc
+
+Node.js installs npm and node.
+
+node - runs programs written in java script.
+npm - node package manager for installing open source development tools.
+
+browser-sync tool - automatically reloads the browser when you save changes to your code.
+
+sudo npm install -g browser-sync
+>(The -g in the command stands for “global.” Installing the package globally means that you will be able to run browser-sync from any directory.)
+
+>When you start browser-sync, as you will in the next chapter, it will run until you press Control-C
 
 ### Recommended Packages for Sublime and Atom:
 
