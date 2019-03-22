@@ -1,4 +1,4 @@
-chrome://inspect/
+ - chrome://inspect/
 
 1. Documentation
 2. Misc
@@ -21,6 +21,9 @@ sudo npm install -g browser-sync
 >(The -g in the command stands for “global.” Installing the package globally means that you will be able to run browser-sync from any directory.)
 
 >When you start browser-sync, as you will in the next chapter, it will run until you press Control-C
+
+Starting browser-sync
+>browser-sync start --server --browser "Google Chrome" --files "stylesheets/*.css, *.html"
 
 ### Recommended Packages for Sublime and Atom:
 

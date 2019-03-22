@@ -1,5 +1,12 @@
 # Notes
 
+favicon.ico for icon.
+
+### HTML
+
+Image tags are different from most other elements in that they do not wrap other elements, but instead refer to a resource. When the browser encounters an <img> tag, it draws the image to the page. This is known as a replaced element. Other replaced elements include embedded documents and applets.
+Because they do not wrap content or other elements, <img> tags do not have a corresponding closing tag. This makes them self-closing tags (also known as void tags).
+
 ### CSS - Cascading Style Sheets
 
 Css starts with a rule set, which has 2 parts. (1. Selector 2. Declaration Block)
@@ -70,6 +77,60 @@ object, video {
    max-width: 100%;
 	}
 }
+
+**normalize.css** 
+ - helps the CSS you write display consistently across browsers. 
+ - available freely
+ - Go to cdnjs.com/libraries/normalize and find the version of the file ending with .min.css
+ (All browsers come with a set of default styles, but the defaults are different from browser to browser. normalize.css gives you a good starting point for developing your own custom CSS for a website or web app)
+
+a[href]{
+  /* style declaration */
+}
+This selector would match any anchor element with an href attribute. 
+
+a[href="#"]{
+  /* style declaration */
+}
+This selector would match only those anchor elements whose href attribute has a value of #.
+
+body span {
+  /* style declarations */
+}
+it targets any span descended from a body
+
+similary, 
+body .thumbnail-title {
+  /* style declarations */
+}
+
+Child selector syntax uses the combinator >
+
+Child selectors target elements of a specified type that are the immediate children of another specified element.
+
+li > span {
+  /* style declarations */
+}
+Reading from right to left, this selector targets any span that is the immediate child of a li element 
+
+
+Sibling selector syntax uses the combinator ~.
+this syntax targets elements with the same parent. However, because of the directional nature of relationship selectors, the results might not be exactly as you expect.
+
+header ~ ul {
+  /* style declarations */
+}
+This selector targets any ul that is preceded by a header with the same parent element.
+Reversing the syntax (ul ~ header) would result in no elements being selected, because there is no header preceded by a sibling ul.
+
+Adjacent sibling combinator is +, which targets elements that are immediately preceded by a sibling of the specified type. 
+
+li + li {
+  /* style declarations */
+}
+This syntax would select all li elements immediately preceded by a sibling li.
+
+
 
 ### Responsive
 
