@@ -8,6 +8,12 @@
 
 https://devdocs.io/
 
+https://github.com/google/ios-webkit-debug-proxy
+
+[SVG Animation Examples](https://codepen.io/chrisgannon/)
+
+[20 SVG Examples](https://www.creativebloq.com/design/examples-svg-7112785)
+
 ### Misc
 
 Node.js installs npm and node.
