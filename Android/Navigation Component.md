@@ -1,4 +1,4 @@
-## Navigation Component
+# Navigation Component
 
 https://codelabs.developers.google.com/codelabs/android-navigation/#1
 
@@ -66,24 +66,31 @@ Navigatin Component Benifits:
 
 ### **Gradle dependencies:**  
 
-App Build Gradle:
+**Navigation**
+
+App Build Gradle: 
 ```
 implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
 
 implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
 ```
+**Safe Args**
 
-Prj Build Grdle:
+Prj Build Gradle: 
 ```
 classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
 ```
-
+App Build Gradle
+```
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+```
 ## **How to Navigate ?** 
 Navigation to different destinations can be done by 3 ways(by using the parameters created in Nav Graph):
 
 1. via Action Id's
 2. via Destination Id's
-3. via SafeArgs
+3. via SafeArgs Direction classes
 
 In Nav Graph, 
     
@@ -135,6 +142,15 @@ In Nav Graph,
         android:name="com.example.android.navigation.GameWonFragment"
         android:label="@string/sampleLableText"
         tools:layout="@layout/fragment_game_third">
+
+        <argument
+            android:name="numIndex"
+            app:argType="integer"
+            android:defaultValue="1"/>
+        <argument
+            android:name="numValue"
+            app:argType="integer"
+            android:defaultValue="99"/>
     </fragment>
     <fragment
         android:id="@+id/fourthFragment"
@@ -157,24 +173,24 @@ Navigation provides Helper class called **findNavController()** to find the encl
 
 ```
 binding.sampleButton.setOnClickListener {
-    view: View -> Navigation.findNavController(view).navigate(R.id.flow_step_one_dest)
+    view: View -> Navigation.findNavController(view).navigate(R.id.action_firstFragment_to_secondFragment)
 }
 ```
 This can be further simplified, using kotlin extensions on View class
 ```
 binding.sampleButton.setOnClickListener {
-    view: View -> view.findNavController().navigate(R.id.flow_step_one_dest)
+    view: View -> view.findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
 }
 ```
 This can be further simplified.
 Navigation can create onClickListener.
 
 ```
-binding.sampleButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.next_action, null))
+binding.sampleButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_firstFragment_to_secondFragment, null))
 ```
 OR
 ```
-view.findViewById<Button>(R.id.navigate_action_button).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.next_action, null))
+view.findViewById<Button>(R.id.navigate_action_button).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_firstFragment_to_secondFragment, null))
 ```
 
 #### Conditional Navigation
@@ -233,33 +249,56 @@ val button = view.findViewById<Button>(R.id.navigate_destination_button)
 }
 ```
 
-## **Navigation via SafeArgs**
+## **Navigation via SafeArgs Direction classes**
 
-// Below (via Direction Classes)
 
-#### SafeArgs
-
-Safe args allows you to get rid of code like this when passing values between destinations:
+### **SafeArgs**
 
 https://developer.android.com/guide/navigation/navigation-pass-data#Safe-args
+
+Fragments contain Arguments in the form of Android Bundle.
+
+<img src=images/bundle-arguments.png width=50% heigh=25%>
+
+This can cause issues if there is a null value or a different type, while unbundling at the destination fragment.
 
 ```
 val username = arguments?.getString("usernameKey")
 ```
-    
-And, instead, replace it with code that has generated setters and getters.
-    
+
+Safe args allows you to get rid of code like this when passing values between destinations.
+
+So, traditional way can be replaced with, code that has generated setters and getters.
+
+Ex:    
 ```
 val username = args.username
 ```
- 
+<strong>Using Safe Args plugin, 
+
+it generates class called Direction Class, which will have setters/getters, to represent Navigation from all our actions.</strong>
+
+If ThirdFragment takes 2 arguments, as in Example 3, then arguments can be passed from SecondFragment to ThirdFragment as below
+
 ```
-<fragment>
+view.findNavController().navigate(SecondFragmentDirections.actionSecondFragmentToThirdFragment(int1stArg,int2ndArg))
+
+view.findNavController().navigate(SecondFragmentDirections.actionSecondFragmentToFourthFragment())
+```
+
+**Example 3** 
+```
+<fragment
+id/ThirdFragment>
 ...
 <argument
-    android:name="flowStepNumber"
+    android:name="numIndex"
     app:argType="integer"
     android:defaultValue="1"/>
+<argument
+    android:name="numValue"
+    app:argType="integer"
+    android:defaultValue="99"/>    
 </fragment>
 ```
 
@@ -272,7 +311,7 @@ val safeArgs = FlowStepFragmentArgs.fromBundle(arguments)
 val flowStepNumber = safeArgs.flowStepNumber 
 ```
 
-#### Safe Args Direction classes
+### **Safe Args Direction classes**
 
 You can also use safe args to navigate in a type safe way, with or without adding arguments. You do this using the generated Directions classes.
 
