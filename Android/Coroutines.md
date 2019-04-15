@@ -1,4 +1,4 @@
-## Coroutines:
+# Coroutines:
 
 https://codelabs.developers.google.com/codelabs/kotlin-coroutines/#0
 
@@ -29,7 +29,7 @@ https://codelabs.developers.google.com/codelabs/kotlin-coroutines/#0
 
 Because Coroutines code is compiled from sequential code, we dont have to specify call backs. Compiler will make sure the results of the coroutine are available before resuming.
 
-#### To Use Coroutines, we need
+## To Use Coroutines, we need
 
 - Job
     > Job is anything that can be cancelled.
@@ -56,7 +56,7 @@ Because Coroutines code is compiled from sequential code, we dont have to specif
 - @WorkerThread annotation, this function cannot be called on the main thread without causing an error.
 -  annotated with @UiThread, it must run fast enough to execute on the main thread. That means, it needs to return very quickly, so that the next screen update is not delayed. 
 
-#### CoroutineScope
+## CoroutineScope
 - In Kotlin, all coroutines run inside a CoroutineScope. 
 - A scope controls the lifetime of coroutines through its job. 
 - When you cancel the job of a scope, it cancels all coroutines started in that scope. 
@@ -65,7 +65,7 @@ Because Coroutines code is compiled from sequential code, we dont have to specif
 - A dispatcher controls which thread runs a coroutine.
   - a coroutine can switch dispatchers any time after it's started. For example, a coroutine can start on the main dispatcher then use another dispatcher to parse a large JSON result off the main thread.
 
-#### CoroutineContext
+## CoroutineContext
 
 - A CoroutineScope can take a CoroutineContext as a parameter. 
 - The CoroutineContext is a set of attributes that configures the coroutine. It can define the threading policy, exception handler, etc.
@@ -93,7 +93,7 @@ It's important to cancel any coroutines that are no longer required to avoid unn
     - If you don't, the scope will run until your app is terminated. If that's not what you intended, you will be leaking memory.
 - Scopes created with the CoroutineScope constructor add an implicit job, which you can cancel using uiScope.coroutineContext.cancel()
 
-#### ViewModelScope
+## ViewModelScope
 
 To avoid writing above boilerplate code (**Cancelling**) in every ViewModel, use AndroidX implementation ```"androidx.lifecycle:lifecycle-viewmodel-ktx:x.x.x"``` library in the gradle.
 
@@ -131,7 +131,7 @@ fun onMainViewClicked() {
 - Since viewModelScope has a default dispatcher of Dispatchers.Main, this coroutine will be launched in the main thread.
 - The function delay is a suspend function.
 
-#### suspendCoroutine
+## suspendCoroutine
 
 - Kotlin provides a function suspendCoroutine that's used to convert callback-based APIs to suspend functions.
 

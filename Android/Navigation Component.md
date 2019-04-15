@@ -302,14 +302,18 @@ id/ThirdFragment>
 </fragment>
 ```
 
-Using the ```<argument>``` tag, safeargs generates a class called FlowStepFragmentArgs. 
-    
-Since the XML includes an argument called **flowStepNumber**, specified by **android:name="flowStepNumber"**, the generated class **FlowStepFragmentArgs** will include a variable **flowStepNumber** with getters and setters.
+Using the ```<argument>``` tag, safeargs generates a class called **ThirdFragmentArgs**. 
+
+Args can be accessed as,
 
 ```
-val safeArgs = FlowStepFragmentArgs.fromBundle(arguments)
-val flowStepNumber = safeArgs.flowStepNumber 
+var safeArgs = ThirdFragmentArgs.fromBundle(arguments)
+
+val index = safeArgs.numIndex 
+val value = safeArgs.numValue 
 ```
+    
+Since the XML includes an argument called **numIndex**, specified by **android:name="numIndex"**, the generated class **ThirdFragmentArgs** will include a variable **numIndex** with getters and setters.
 
 ### **Safe Args Direction classes**
 
