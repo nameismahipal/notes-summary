@@ -5,8 +5,7 @@ Make your software fail, fix those failures, then your code runs reliably.
 
  SUT (Software under Test)
 
- image
-
+<img src=images/whats-testing.png width=50% heigh=25%>
 
  ### Assertions
 
@@ -16,4 +15,3 @@ Make your software fail, fix those failures, then your code runs reliably.
  
  Why ? makes code self-checking, make code fail early.
 
- 
