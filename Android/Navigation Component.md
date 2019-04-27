@@ -33,7 +33,22 @@ The Navigation component consists of three key parts that are described below:
 1. Navigation Graph (```res/navigation/navigation.xml```)
     > An XML Resource that contains all navigation destinations at single location. All individual content areas are called destinations.
 
-    >To be declared in manifest.xml
+    >To be declared in manifest.xml (If there is any deep-link/widgets)
+    ```
+    <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/home_dest">
+
+    <!-- ...tags for fragments and activities here -->
+
+    </navigation>
+    ```
+    ```
+    1. <navigation> is the root node of every navigation graph.
+    2. <navigation> contains one or more destinations, represented by <activity> or <fragment> elements.
+    3. app:startDestination is an attribute that specifies the destination that is launched by default when the user first opens the app.
+    ```
 
 2. NavHost (```create <fragment> view in activity ```)
     >An empty container that displays destinations from navigation graph. Navigation component contains a default NavHost implementation, [NavHostFragment](https://developer.android.com/reference/androidx/navigation/fragment/NavHostFragment.html) that displays destinations. </br> When using fragments as destinations, the NavHostFragment automatically adds the FragmentNavigator class to its NavController.
@@ -47,12 +62,25 @@ The Navigation component consists of three key parts that are described below:
             app:defaultNavHost="true"  //this will intercept system back key
             app:navGraph="@navigation/navigation"
     ```
-
     this (nav host) fragment replaces itself with different destinations.
+
+    ```
+    1. android:id defines an ID for the fragment that you can use to reference the destination elsewhere in this XML and your code.
+    2. android:name declares the fully qualified class name of the fragment to instantiate when you navigate to that destination.
+    3. tools:layout specifies what layout should be shown in the graphical editor.
+    ```
 
 3. NavController
     >Manages app navigation(swapping of destinations) within a NavHost. Keeps track of the current position within Navigation graph. </br></br>NavControllers support leaving the navigation graph by navigating to another activity using the ActivityNavigator class and its nested ActivityNavigator.Destination class
-
+ 
+    Depending on whether you're calling the navigation command from within a **fragment, activity or view**:
+    (few ways to get a NavController object associated with your NavHostFragment)
+    ``` 
+    (Kotlin)
+    - Fragment.findNavController()
+    - View.findNavController()
+    - Activity.findNavController(viewId: Int)
+    ```
 
 Navigatin Component Benifits: 
 
@@ -74,6 +102,9 @@ implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigat
 
 implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
 ```
+
+NavigationUI has static methods that associate menu items with navigation destinations, and navigation-ui-ktx is a set of extension functions that do the same. If NavigationUI finds a menu item with the same ID as a destination on the current graph, it configures the menu item to navigate to that destination.
+
 **Safe Args**
 
 Prj Build Gradle: 
@@ -312,6 +343,12 @@ var safeArgs = ThirdFragmentArgs.fromBundle(arguments)
 val index = safeArgs.numIndex 
 val value = safeArgs.numValue 
 ```
+Or in a Safe way as
+```
+val safeArgs: ThirdFragmentArgs by navArgs()
+val index = safeArgs.numIndex
+val value = safeArgs.numValue 
+```
     
 Since the XML includes an argument called **numIndex**, specified by **android:name="numIndex"**, the generated class **ThirdFragmentArgs** will include a variable **numIndex** with getters and setters.
 
@@ -323,8 +360,8 @@ You can also use safe args to navigate in a type safe way, with or without addin
 Navigation vis SafeArgs
  ```
 view.findViewById<Button>(R.id.navigate_action_button)?.setOnClickListener{
-    val action = HomeFragmentDirections.nextAction()
-    action.setFlowStepNumber(1)
+    val action = SecondFragmentDirections.action_secondFragment_to_thirdFragment()
+    action.setNumIndex(1)
     findNavController().navigate(action)
 }
 ```
@@ -337,8 +374,10 @@ The Navigation Components include a NavigationUI class and the navigation-ui-ktx
 - navigation-ui-ktx is a set of extension functions that do the same. 
 
 
-    
+   
 If NavigationUI finds a menu item with the same ID as a destination on the current graph, it configures the menu item to navigate to that destination.
+
+AppBarConfiguration: The purpose of AppBarConfiguration is to specify the configuration options you want for your toolbars, collapsing toolbars, and action bars. Configuration options include whether the bar must handle a drawer layout and which destinations are considered top-level destinations(so that Nav icon is shwon only when top-level destinations are active).
 
 ```
 override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -366,13 +405,18 @@ private fun setupBottomNavMenu(navController: NavController) {
 
 #### Deep Links and Navigation
 
-Navigation components also include deep link support. Deep links are a way to jump into the middle of your app's navigation, whether that's from an actual URL link or a pending intent from a notification.
+Navigation components also include deep link support. 
+
+Deep links are a way to jump into the middle of your app's navigation, whether that's from an actual URL link or a pending intent from a notification.
 
 One benefit of using the navigation library to handle deep links is that it ensures users start on the right destination with the appropriate back stack from other entry points such as app widgets, notifications, or web links.
+
+Navigation provides a NavDeepLinkBuilder class to construct a PendingIntent that will take the user to a specific destination.
 
 ```
   val args = Bundle()
   args.putString("myarg", "From Widget");
+
   val pendingIntent = NavDeepLinkBuilder(context)
         .setGraph(R.navigation.mobile_navigation)
         .setDestination(R.id.deeplink_dest)
