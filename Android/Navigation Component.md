@@ -51,7 +51,11 @@ The Navigation component consists of three key parts that are described below:
     ```
 
 2. NavHost (```create <fragment> view in activity ```)
-    >An empty container that displays destinations from navigation graph. Navigation component contains a default NavHost implementation, [NavHostFragment](https://developer.android.com/reference/androidx/navigation/fragment/NavHostFragment.html) that displays destinations. </br> When using fragments as destinations, the NavHostFragment automatically adds the FragmentNavigator class to its NavController.
+    >An empty container that displays destinations from navigation graph. Navigation component contains a default NavHost implementation, [NavHostFragment](https://developer.android.com/reference/androidx/navigation/fragment/NavHostFragment.html) that displays destinations. </br> 
+
+    >When using fragments as destinations, the NavHostFragment automatically adds the FragmentNavigator class to its NavController.
+    
+    >Manages app navigation within a NavHost. Your API to navigate through the NavGraph.
 
     ```
     <fragment
@@ -97,6 +101,13 @@ Navigatin Component Benifits:
 **Navigation**
 
 App Build Gradle: 
+```
+implementation "androidx.navigation:navigation-fragment:$rootProject.navigationVersion"
+
+implementation "androidx.navigation:navigation-ui:$rootProject.navigationVersion"
+```
+
+With Kotlin Extensions
 ```
 implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
 
