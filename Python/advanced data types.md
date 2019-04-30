@@ -10,7 +10,7 @@
     - stores data in key, value pairs (mutable) , = {1:"one",2:"two"}
 
 
-### `list` cheat sheet
+###  `cheat sheet`
 
 | type             	| `list`   | `Tuples` | `Sets` | `Dictionaries`|                                                                             	
 |-------------	| --------	|--------	|--------	|--------	|
