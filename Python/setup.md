@@ -1,4 +1,4 @@
-### On Terminal
+# On Terminal
 
 py -3.7 (Win)
 
@@ -68,7 +68,7 @@ in the REPL
 - you can type commands and instantly see the output printed out. 
 - you can print out help for methods and objects in Python, list out what methods are available, and much more.
 
-## Start REPL 
+# Start REPL 
 
 Cltrl/Cmd + Shift + P - opens the command palette, and start select **“Start REPL”**
 
@@ -85,19 +85,30 @@ Three very useful methods in the REPL
 - help() - to instantly see available documentation about the method, the parameters it expects, and what it returns. Ex: help(str.isupper)
 
 
-### Creating python files with the *.py extension
+## Creating python files with the *.py extension
 
 - *.py extension
 
 - Ctrl/Cmd + N to create new file. 
 
-open the terminal (select the termina with shelll, usually 1.)
+### Naming Tips
 
-open the Command panel, and type and select "Run Python File in Terminal"
+- Filenames should be *all lowercase
+- Words should be separated with underscores _
+- Filenames should be short
 
+### What are *.pyc files?
 
-# Credits:
-- Nina Zakharenko
+- For optimization and other reasons, Python code can be compiled to intermediary .pyc files. 
+- To safely delete them from the current project directory, run `find . -name "*.pyc" -delete` (on linux or macOS).
+
+### Running
+
+- Once you’ve opened your hello.py file and selected your new terminal window, open the VS Code command palette.
+
+- open the terminal (select the termina with shelll, usually 1.)
+
+- open the Command panel (Ctrl/Cmd +Shift+P), and type and select "Run Python File in Terminal"
 
 
 
