@@ -111,5 +111,13 @@ Three very useful methods in the REPL
 - open the Command panel (Ctrl/Cmd +Shift+P), and type and select "Run Python File in Terminal"
 
 
+# LIBRARIES
 
+  ## Installing the requests library with pip
 
+     3rd part library called requests to make light work of retrieving data from web APIs. 
+     To install the requests library, run this on your command line:
+
+    ```(env) $ python3.7 -m pip install requests```
+
+    This runs the pip module and asks it to find the requests library on PyPI.org (the Python Package Index) and install it in your local system, so that it becomes available for you to import.
