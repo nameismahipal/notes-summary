@@ -22,3 +22,26 @@ Traceback (most recent call last):
 ValueError: too many values to unpack (expected 2)
 ```
 You’ll see ValueError: too many values to unpack (expected 2) if you forget to call my_dict.items(), and try to loop over what you’d expect to be key, value pairs.   
+
+4. forgetting space while building query
+
+This throws error
+```py
+def create_query(languages, min_stars=50000):
+    query = f"stars:>{min_stars}"
+
+    for language in languages:
+        query += f"language:{language}"
+
+    return query 
+``` 
+This Succeeds
+```py
+def create_query(languages, min_stars=50000):
+    query = f"stars:>{min_stars} "
+
+    for language in languages:
+        query += f"language:{language}"
+
+    return query 
+```    
